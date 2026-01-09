@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Risk Assessment | Medical AI Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">🩺</div>
+                <h1>Diabetes Risk Assessment</h1>
+                <p class="subtitle">Advanced health screening powered by machine learning algorithms · Get your personalized risk evaluation in seconds</p>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div class="info-banner">
+                <span class="info-banner-icon">💡</span>
+                <div class="info-banner-text">
+                    <strong>Before you begin:</strong> This assessment requires recent lab results and measurements. BMI and waist-to-hip ratio will be automatically calculated from your inputs.
+                </div>
+            </div>
+
+            <form action="/predict" method="post">
+
+                <!-- Blood Sugar & Metabolic Markers -->
+                <div class="section-title">
+                    <span class="section-icon">🔬</span>
+                    Laboratory Tests & Metabolic Markers
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Fasting Blood Glucose</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Normal: 70-99 | Pre-diabetes: 100-125 | Diabetes: 126+ mg/dL</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" step="0.1" name="fasting_glucose" placeholder="e.g., 95" required>
+                            <span class="unit">mg/dL</span>
+                        </div>
+                        <div class="helper-text">Blood sugar after 8-hour fast</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">HbA1c (Glycated Hemoglobin)</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Normal: <5.7% | Pre-diabetes: 5.7-6.4% | Diabetes: ≥6.5%</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" step="0.1" name="hba1c" placeholder="e.g., 5.5" required>
+                            <span class="unit">%</span>
+                        </div>
+                        <div class="helper-text">3-month blood sugar average</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">HDL Cholesterol</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Optimal: Men >40 | Women >50 mg/dL (higher is better)</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" step="0.1" name="hdl_cholesterol" placeholder="e.g., 55" required>
+                            <span class="unit">mg/dL</span>
+                        </div>
+                        <div class="helper-text">"Good" cholesterol level</div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="section-title">
+                    <span class="section-icon">👤</span>
+                    Demographics & Personal Information
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Age</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="age" placeholder="e.g., 45" required>
+                            <span class="unit">years</span>
+                        </div>
+                        <div class="helper-text">Your current age</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Biological Gender</span>
+                        </label>
+                        <select name="male" required>
+                            <option value="">Select gender</option>
+                            <option value="0">Female</option>
+                            <option value="1">Male</option>
+                        </select>
+                        <div class="helper-text">Gender assigned at birth</div>
+                    </div>
+                </div>
+
+                <!-- Body Measurements -->
+                <div class="section-title">
+                    <span class="section-icon">📏</span>
+                    Anthropometric Measurements
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Height</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" step="0.1" name="height_cm" placeholder="e.g., 170" required>
+                            <span class="unit">cm</span>
+                        </div>
+                        <div class="helper-text">Standing height without shoes</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Weight</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" step="0.1" name="weight_kg" placeholder="e.g., 75" required>
+                            <span class="unit">kg</span>
+                        </div>
+                        <div class="helper-text">Body weight in light clothing</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Waist Circumference</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Measure horizontally at navel level while standing</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="waist_cm" placeholder="e.g., 85" required>
+                            <span class="unit">cm</span>
+                        </div>
+                        <div class="helper-text">At belly button level</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Hip Circumference</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Measure around the widest part of your buttocks</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="hip_cm" placeholder="e.g., 95" required>
+                            <span class="unit">cm</span>
+                        </div>
+                        <div class="helper-text">At widest point of hips</div>
+                    </div>
+                </div>
+
+                <div class="auto-calculated">
+                    <span class="auto-calculated-icon">🤖</span>
+                    <div class="auto-calculated-text">
+                        <strong>Auto-calculated metrics:</strong> BMI and waist-to-hip ratio will be automatically computed from your height, weight, waist, and hip measurements.
+                    </div>
+                </div>
+
+                <!-- Blood Pressure -->
+                <div class="section-title">
+                    <span class="section-icon">❤️</span>
+                    Cardiovascular Measurements
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Systolic Blood Pressure</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Normal: <120 | Elevated: 120-129 | High: ≥130 mmHg</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="systolic_bp" placeholder="e.g., 120" required>
+                            <span class="unit">mmHg</span>
+                        </div>
+                        <div class="helper-text">Upper/first number in BP reading</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-main">Diastolic Blood Pressure</span>
+                            <span class="info-icon">i
+                                <span class="tooltip">Normal: <80 | Elevated: 80-89 | High: ≥90 mmHg</span>
+                            </span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input type="number" name="diastolic_bp" placeholder="e.g., 80" required>
+                            <span class="unit">mmHg</span>
+                        </div>
+                        <div class="helper-text">Lower/second number in BP reading</div>
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit">Calculate Risk Assessment</button>
+                </div>
+            </form>
+
+            {% if probability %}
+            <div class="result {{ risk_class }}">
+                <div class="result-badge">Assessment Complete</div>
+                <h2>Risk Score: {{ probability }}%</h2>
+                <p>{{ message }}</p>
+                <div class="result-actions">
+                    <a href="/" class="result-btn">New Assessment</a>
+                    <button type="button" class="result-btn" onclick="window.print()">Print Results</button>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
